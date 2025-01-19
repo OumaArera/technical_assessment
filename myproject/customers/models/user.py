@@ -1,7 +1,7 @@
-from django.db import models  # type: ignore
-from django.contrib.auth.models import AbstractUser  # type: ignore
-from django.utils.translation import gettext_lazy as gtl  # type: ignore
-from phonenumber_field.modelfields import PhoneNumberField  # type: ignore
+from django.db import models # type: ignore
+from django.contrib.auth.models import AbstractUser # type: ignore
+from django.utils.translation import gettext_lazy as gtl # type: ignore
+from phonenumber_field.modelfields import PhoneNumberField # type: ignore
 
 
 class User(AbstractUser):
@@ -28,7 +28,7 @@ class User(AbstractUser):
         error_messages={"unique": gtl("A user with that email already exists.")},
     )
     customer_code = models.CharField(
-        max_length=20,
+        max_length=100,
         unique=True,
         error_messages={"unique": gtl("A customer with the provided code already exists")},
     )
@@ -59,5 +59,10 @@ class User(AbstractUser):
     @classmethod
     def create_user(cls, validated_data):
         """Creates a new user instance from the validated data."""
-        new_user = cls(**validated_data)
-        return new_user
+        password = validated_data.pop("password")
+        user = cls(**validated_data)
+        
+        user.set_password(password)
+        user.full_clean()
+        user.save()
+        return user

@@ -70,6 +70,8 @@ class OrderRepository:
             order.full_clean()
             order.save()
             return order
+        except NotFoundException as ex:
+            raise ex
         except ValidationError as ex:
             logger.error(f"Validation error while updating order: {ex}", exc_info=True)
             raise IntegrityException(message=ex)
