@@ -13,7 +13,7 @@ def create_customer_setup(self, user_model):
     test_customers = [
         {
             "username": "Ouma", 
-            "phone_number": "+254748800715", 
+            "phone_number": "+254748800714", 
             "password": "Test1234#", 
             "first_name": "Ouma",
             "last_name": "Arera",

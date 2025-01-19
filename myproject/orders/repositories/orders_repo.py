@@ -1,6 +1,7 @@
 import logging
 from django.db import IntegrityError, DatabaseError  # type: ignore
 from django.core.exceptions import ValidationError, ObjectDoesNotExist  # type: ignore
+from orders.utils import send_sms
 from myproject.db_exceptions import (
     NotFoundException,
     IntegrityException,
@@ -21,6 +22,18 @@ class OrderRepository:
             new_order = Order.create_order(order_data)
             new_order.full_clean()
             new_order.save()
+            recipient_name = f"{new_order.customer.first_name} {new_order.customer.last_name}"
+            phone_number = new_order.customer.phone_number
+            order_number = new_order.order_number
+            price = new_order.price
+            item = new_order.item
+            send_sms.sending(
+                recipient_name=recipient_name,
+                recipient_number=phone_number,
+                order_no=order_number,
+                price=price,
+                item=item
+            )
             return new_order
         except ValidationError as ex:
             logger.error(f"Validation error while creating order: {ex}", exc_info=True)

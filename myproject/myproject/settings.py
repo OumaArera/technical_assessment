@@ -34,8 +34,8 @@ JWT_ISSUER = os.environ.get('JWT_ISSUER')
 # SMS settings
 # SMS service credentials
 SMS_API_KEY = os.getenv("SMS_API_KEY")
-SMS_SENDER_ID = os.getenv("SMS_SENDER_ID")
-SMS_API_URL = os.getenv("SMS_API_URL")
+SMS_USERNAME = os.getenv("SMS_USERNAME")
+SHORT_CODE = os.getenv("SHORT_CODE")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'customers',
     'orders',
     
