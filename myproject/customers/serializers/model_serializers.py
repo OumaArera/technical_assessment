@@ -1,4 +1,4 @@
-import phonenumbers
+import phonenumbers # type: ignore
 import re
 from rest_framework import serializers
 from customers.models.user import User

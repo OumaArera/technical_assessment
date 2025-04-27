@@ -2,9 +2,6 @@ from datetime import datetime
 import random
 import string
 
-# from myproject.customers.services.user_service import UserService
-# from customers.services.user_service import UserService
-
 def generate_unique_customer_code():
         """
         Generates the time stamp

@@ -3,7 +3,6 @@ from orders.models.orders import Order
 from rest_framework.test import APITestCase # type: ignore
 from customers.models.user import User
 from django.contrib.auth import authenticate # type: ignore
-
 from myproject.tokens_utils import generate_jwt_token 
 
 def create_customer_setup(self, user_model):

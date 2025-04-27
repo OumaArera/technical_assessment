@@ -14,6 +14,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv # type: ignore
 from datetime import timedelta
+from decouple import config # type: ignore
+
+
 
 load_dotenv()
 
@@ -54,10 +57,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'auth_service',
     'customers',
     'orders',
     
 ]
+
+AUTH0_DOMAIN=os.environ.get('AUTH0_DOMAIN')
+AUTH0_CLIENT_ID= os.environ.get('AUTH0_CLIENT_ID')
+AUTH0_SECRET_KEY=os.environ.get('AUTH0_CLIENT_SECRET')
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -153,6 +163,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTHENTICATION_BACKENDS = [
+#     "django.contrib.auth.backends.ModelBackend",
+# ]
+# PASSWORD_HASHERS = [
+#     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+# ]
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
@@ -162,3 +178,4 @@ PASSWORD_HASHERS = [
 
 
 AUTH_USER_MODEL = 'customers.User'
+
